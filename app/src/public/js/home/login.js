@@ -18,4 +18,15 @@ function login() {
         },
         body: JSON.stringify(req), //req를 JSON 형태로 변환
     })
+    .then((res) => res.json())
+    .then((res) => {
+        if (res.success) { //res.success가 true일 경우
+            location.href = "/"; //"/"로 이동
+        } else {
+            alert(res.msg);  
+        } 
+    })
+    .catch((err) => {
+        console.error("Failed to Login");
+    });
 };

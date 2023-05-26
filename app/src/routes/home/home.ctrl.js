@@ -1,6 +1,5 @@
 "use strict";
 
-
 const User = require("../../models/User")
 
 const output = {
@@ -10,12 +9,16 @@ const output = {
     
     login: (req, res) => {
         res.render("home/login");
+    }, 
+    
+    register: (req, res) => {
+        res.render("home/register");
     },
 };
 
 const process = {
     login: (req, res) => {
-        const user = new User(req.body);
+        const user = new User(req.body);// class User의 인스턴스를 생성하면서 req.body를 인수로 전달
         const response = user.login();
         return res.json(response);
 

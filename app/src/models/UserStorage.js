@@ -7,13 +7,13 @@ class UserStorage {
         name: ["sang", "bing", "bang"],
     };
     static getUsers(...fields) { // 이함수를 통해 #users에 접근 가능,...fields는 지정한 파라미터를 list형태로 전달
-        const users = this.#users;
+        const users = this.#users; //은닉화된users를 users에 대입
         const newUsers = fields.reduce((newUsers, field) => { //newUsers는 새로 생성될 data, field는 fieldsd(id, password)의 데이터가 순회하며 대입 
-            if (users.hasOwnProperty(field)) { //field에 대입된 id, password가 users에 있는지 확인
+            if (users.hasOwnProperty(field)) { //field에 대입된 id, password key가 users에 있는지 확인
                 newUsers[field] = users[field];  //있으면 users에 해당 데이터를 newUsers에 대응하여 저장
             }
             return newUsers;
-        }, {});
+        }, {}); //{}를 지정하면 reduce(newUsers, field) 사용시 newUsers의 초기 값을 지정할 수 있음 {}는 object 타입
         return newUsers; 
     }
     static getUserInfo(id) { //id를 입력하면 해당 id의 password와 name을 반환
@@ -25,7 +25,6 @@ class UserStorage {
             return newUser;
         }, {});
         return userInfo;
-
     }
 }
 

@@ -19,12 +19,22 @@ class UserStorage {
     static getUserInfo(id) { //id를 입력하면 해당 id의 password와 name을 반환
         const users = this.#users;
         const idx=users.id.indexOf(id); //입력 받은 id 값에 해당하는 index를 idx에 대입
-        const usersKeys = Object.keys(users); //users에서 key 값만 리스트로 만듬 [id,password,name]
+        const usersKeys = Object.keys(users); //users에서 key 값만 리스트로 만듬 ->[id,password,name]
         const userInfo= usersKeys.reduce((newUser, info) => { //userKeys의 값을 info에 순회하면 대입 후 newUser에 저장 
             newUser[info] = users[info][idx]; //users에서 info 즉 입력받은 id(key)와 그에 해당하는 index의 모든 정보(password, name)를 대입
             return newUser;
         }, {});
         return userInfo;
+    }
+    static save(userInfor) { //userInfor는 User.js의 client
+        const users = this.#users;
+        users.id.push(userInfor.id); //push를 통해  uesr에 data를 넣을 수 있지만 server 재부팅시 사라짐
+        users.name.push(userInfor.name);
+        users.password.push(userInfor.password);
+        return { success: true };
+        console.log(users);
+        
+
     }
 }
 

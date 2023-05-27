@@ -20,6 +20,11 @@ const process = {
     login: (req, res) => {
         const user = new User(req.body);// class User의 인스턴스를 생성하면서 req.body를 인수로 전달
         const response = user.login();
+        return res.json(response); //client로 응답
+    },
+    register: (req, res) => {
+        const user = new User(req.body);// class User의 인스턴스를 생성하면서 req.body를 인수로 전달
+        const response = user.register();
         return res.json(response);
 
 
